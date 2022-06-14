@@ -12,15 +12,12 @@ function putHistory(data) {
     } else {
       historyData = JSON.parse(localStorage.getItem(CACHE_KEY));
     }
+    historyData.unshift(data);
+    if(historyData.length > 5) {
+      historyData.pop();
+    }
+    localStorage.setItem(CACHE_KEY, JSON.stringify(historyData));
   }
-
-  historyData.unshift(data);
-
-  if(historyData.length > 5) {
-    historyData.pop();
-  }
-
-  localStorage.setItem(CACHE_KEY, JSON.stringify(historyData));
 }
 
 function showHistory() {
